@@ -1,0 +1,65 @@
+import { useState } from "react";
+import axios from "axios";
+
+function Mot()
+{
+	const [msg, setMsg] = useState("");
+	const [auth, setAuth] = useState("");
+
+	const get_msg = (event) => {
+		event.preventDefault();
+		let url = "https://api.quotable.io/random";
+		axios.get(url)
+		.then(res => {
+			setMsg(res.data.content);
+			setAuth(res.data.author);
+		})
+		.catch(err => setMsg("issue " + err));
+	}
+return(
+<>
+<center>
+	<h1> Mot App by Abhay Badlani </h1>
+	<form onSubmit={ get_msg}>
+	<input type="submit" value="Get Msg" />
+	</form>
+	<h2> { msg } </h2>
+	<h2> { auth } </h2>
+</center>
+</>
+);
+}  
+
+export default Mot;
+==========================================================================================
+
+import logo from './logo.svg';
+import './App.css';
+import Mot from "./Mot";
+
+function App() {
+  return (
+   	 <Mot/>
+  );
+}
+
+export default App;
+
+===============================================================================
+
+*
+{
+font-size:3vw;
+font-family: Sinsun;
+}
+
+body
+{
+background-color: lightblue;
+}
+
+h2 {
+border:dashed;
+width:60%;
+border-radius:40px;
+}
